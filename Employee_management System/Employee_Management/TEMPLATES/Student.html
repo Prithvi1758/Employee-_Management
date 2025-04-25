@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>Student Management System</title>
+</head>
+<style>
+   
+</style>
+<body>
+
+  <h1>STUDENT MANAGEMENT SYSTEM</h1>
+
+  <table id="studentTable">
+      <thead>
+          <tr>
+            <th>Sr No</th>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for student in std %}
+          <tr id="student_{{ student.Roll_no }}">
+              <td>{{ forloop.counter }}</td>
+              <td>{{ student.Roll_no }}</td>
+              <td>{{ student.Name }}</td>
+              <td>{{ student.Email }}</td>
+              <td>{{ student.Department }}</td>
+              <td>
+                  <a href="/update/{{ student.Roll_no }}/">
+                      <button>Edit</button>
+                  </a>
+
+                  <form method="POST" action="/delete/{{ student.Roll_no }}/" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit">Delete</button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+  
+  <a href="{% url 'student_page' %}" id="std"  style="margin-left: 50%;"><button>ADD Student Records</button></a>
+
+</body>
+</html>

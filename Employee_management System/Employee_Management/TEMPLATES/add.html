@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'add.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" id="stdform">
+        {% csrf_token %}
+        <label for="Rollno">Roll No*</label>
+        <input type="text" name="Rollno" value="{{ Student.Roll_no }}" placeholder="Enter Roll No" >
+        <br>
+
+        <label for="Name">Student Name*</label>
+        <input type="text" name="Name" value="{{ Student.Name }}" placeholder="Enter Name" >
+        <br>
+
+        <label for="Email">Email*</label>
+        <input type="email" name="Email" value="{{ Student.Email }}" placeholder="Enter Email" >
+        <label for="" >Department</label>
+        <select name="Department" required>
+            <option value="Science">Science</option>
+            <option value="Arts">ARTS</option>
+            <option value="Commerce">Commerce</option>
+            
+        </select>
+        <br>
+
+        <p>{{ message }}</p>
+        <br>
+        
+        <button formaction="/add/">Add</button>
+       
+    </form>
+</body>
+</html>
